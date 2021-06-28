@@ -1,0 +1,33 @@
+<div>
+  <div>
+    <h1>Buscador de Héroes</h1>
+    <mat-divider></mat-divider>
+  </div>
+  <div fxLayout = "column">
+    <h3>Buscador</h3>
+    <mat-form-field>
+      <mat-label>Number</mat-label>
+      <input type="text"
+             placeholder="Heroe..."
+             aria-label="Number"
+             matInput
+             [(ngModel)]="termino"
+             [matAutocomplete]="auto"
+             (input)="buscando()">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="opcionSeleccionada($event)">
+        <mat-option *ngFor="let heroe of heroes; index as i" [value]="heroe" >
+          {{heroe.superhero}}
+        </mat-option>
+        <mat-option *ngIf="heroes.length===0 && termino.trim().length" value="">
+          no existem coincidencias con el termino {{ termino }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+
+  <div fxLayout="column">
+    <pre>{{ heroeSeleccionado | json }}</pre>
+  </div>
+  <!-- No se encontro nada con el término {{ termino }} -->
+
+</div>
